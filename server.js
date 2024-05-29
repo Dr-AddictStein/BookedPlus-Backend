@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import mongoose, { connect } from "mongoose";
 import cors from "cors";
 
+import authorRoutes from "./routes/authorRoutes.js";
+
 dotenv.config();
 
 // creates express app
@@ -16,6 +18,17 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
+
+
+
+// author
+app.use("/api/author",authorRoutes);
+
+
+
+
+
 
 mongoose
   .connect(process.env.MONGO_URI)
