@@ -3,15 +3,22 @@ import bcrypt from "bcrypt";
 import validator from "validator";
 
 const userSchema = new mongoose.Schema({
-  username: {
+  firstname: {
     type: String,
     required: true,
-    unique: true,
+  },
+  lastname: {
+    type: String,
+    required: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
+  },
+  restaurant: {
+    type: String,
+    required: true,
   },
 
   role: {
