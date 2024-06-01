@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const authorSchema=new mongoose.Schema({
-    name:{
+    firstname:{
+        type:String,
+        required:true
+    },
+    lastname:{
         type:String,
         required:true
     },
@@ -9,7 +13,7 @@ const authorSchema=new mongoose.Schema({
         type:String,
         required:true
     }
-});
+},{timestamps:true});
 
 const author = mongoose.model("AuthorCollection",authorSchema);
 

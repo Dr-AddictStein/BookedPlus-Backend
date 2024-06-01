@@ -23,7 +23,9 @@ export const getSingleAuthor = async (req, res) => {
 
 export const createAuthor = async (req, res) => {
   try {
-    const newAuthor = new authorModel(req.body);
+    const { firstname, lastname } = req.body;
+    const image = req.file ? req.file.path : '';
+    const newAuthor = new authorModel({firstname,lastname,image});
     const savedAuthor = await newAuthor.save();
     res.status(201).json(savedAuthor);
   } catch (error) {
@@ -43,5 +45,22 @@ export const deleteAuthor = async (req, res) => {
     res.status(200).json(author);
   } else {
     return res.status(400).json({ error: "No Such author Found.!." });
+  }
+};
+
+export const updateAuthor = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Invalid ID.!." });
+  }
+
+  const author = await authorModel.findOneAndUpdate({ _id: id },{
+    ...req.body
+  });
+
+  if (author) {
+    res.status(200).json(author);
+  } else {
+    return res.status(400).json({ error: "No Such Author Found.!." });
   }
 };

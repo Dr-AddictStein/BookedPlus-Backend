@@ -45,3 +45,20 @@ export const deleteUser = async (req, res) => {
     return res.status(400).json({ error: "No Such user Found.!." });
   }
 };
+
+export const updateUser = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Invalid ID.!." });
+  }
+
+  const user = await userModel.findOneAndUpdate({ _id: id },{
+    ...req.body
+  });
+
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    return res.status(400).json({ error: "No Such User Found.!." });
+  }
+};
