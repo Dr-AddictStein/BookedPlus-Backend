@@ -34,7 +34,7 @@ app.use("/api/user",userRoutes);
 
 
 // admin
-app.use("/api/user",adminRoutes);
+app.use("/api/admin",adminRoutes);
 
 
 // blog
