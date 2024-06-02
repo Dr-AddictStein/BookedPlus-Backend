@@ -65,6 +65,13 @@ app.post('/upload', upload.single('audio'), (req, res) => {
     res.status(400).json({ error: 'No file uploaded' });
   }
 });
+app.post('/uploadImage', upload.single('image'), (req, res) => {
+  if (req.file) {
+    res.json({ path: req.file.path });
+  } else {
+    res.status(400).json({ error: 'No file uploaded' });
+  }
+});
 
 mongoose
   .connect(process.env.MONGO_URI)
