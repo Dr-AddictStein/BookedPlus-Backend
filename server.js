@@ -5,6 +5,7 @@ import cors from "cors";
 
 import authorRoutes from "./routes/authorRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
 
 dotenv.config();
@@ -30,6 +31,10 @@ app.use("/api/author",authorRoutes);
 
 // user
 app.use("/api/user",userRoutes);
+
+
+// admin
+app.use("/api/user",adminRoutes);
 
 
 // blog
