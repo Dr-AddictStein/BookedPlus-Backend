@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import userModel from "../models/userModel.js";
+import { sendWelcomeEmail } from "../mailServiceController/mail.js";
 
 export const getAllUser = async (req, res) => {
   const users = await userModel.find({});
@@ -25,6 +26,8 @@ export const createUser = async (req, res) => {
   try {
     const newUser = new userModel(req.body);
     const savedUser = await newUser.save();
+
+    await sendWelcomeEmail(savedUser.email, savedUser.firstname);
     res.status(201).json(savedUser);
   } catch (error) {
     res.status(500).json({ message: error.message });

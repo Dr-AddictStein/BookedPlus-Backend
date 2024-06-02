@@ -2,36 +2,53 @@ import mongoose from "mongoose";
 
 const blogModel = mongoose.Schema(
   {
-    title: {
+    thumbnail: {
       type: String,
       required: true,
     },
-    thumbnailtitle: {
+    thumbnailheadline: {
       type: String,
       required: true,
     },
-    blogheader: {
+    thumbnaildesc: {
       type: String,
       required: true,
     },
+
+
+
+    headline: {
+      type: String,
+      required: true,
+    },
+
     audio: {
       type: String,
       // required:true
     },
     author: {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"AuthorCollection",
-        required:true
-    },
-    body: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "AuthorCollection",
       required: true,
     },
+    body: [
+      {
+        image: {
+          type: String,
+        },
+        header: {
+          type: String,
+        },
+        desc: {
+          type: String,
+          required: true,
+        },
+      }
+    ],
   },
   { timestamps: true }
 );
 
 const blog = mongoose.model("blogCollection", blogModel);
-
 
 export default blog;

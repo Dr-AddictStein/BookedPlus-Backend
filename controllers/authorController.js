@@ -22,10 +22,9 @@ export const getSingleAuthor = async (req, res) => {
 };
 
 export const createAuthor = async (req, res) => {
+  console.log("sadasdsa",req.body)
   try {
-    const { firstname, lastname } = req.body;
-    const image = req.file ? req.file.path : '';
-    const newAuthor = new authorModel({firstname,lastname,image});
+    const newAuthor = new authorModel(req.body);
     const savedAuthor = await newAuthor.save();
     res.status(201).json(savedAuthor);
   } catch (error) {
