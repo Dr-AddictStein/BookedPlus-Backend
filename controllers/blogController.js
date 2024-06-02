@@ -22,6 +22,7 @@ export const getSingleBlog = async (req, res) => {
 };
 
 export const createBlog = async (req, res) => {
+  console.log("Controller Now",req.body)
   try {
     const newBlog = new blogModel(req.body);
     const savedBlog = await newBlog.save();

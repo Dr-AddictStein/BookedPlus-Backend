@@ -15,16 +15,13 @@ const blogModel = mongoose.Schema(
       required: true,
     },
 
-
-
     headline: {
       type: String,
       required: true,
     },
 
     audio: {
-      type: String,
-      // required:true
+      type:String
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
@@ -43,7 +40,7 @@ const blogModel = mongoose.Schema(
           type: String,
           required: true,
         },
-      }
+      },
     ],
   },
   { timestamps: true }
