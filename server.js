@@ -35,11 +35,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // use of middlewars
-app.use(cors({
-  origin: '*', // Allow all origins
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow all methods
-  allowedHeaders: 'Content-Type,Authorization', // Allow specific headers
-}));
+app.use(
+  cors({ origin: [ "http://localhost:5173"] })
+);
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
