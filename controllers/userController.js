@@ -27,6 +27,7 @@ export const createUser = async (req, res) => {
     const newUser = new userModel(req.body);
     const savedUser = await newUser.save();
 
+    
     await sendWelcomeEmail(savedUser.email, savedUser.firstname);
     res.status(201).json(savedUser);
   } catch (error) {
