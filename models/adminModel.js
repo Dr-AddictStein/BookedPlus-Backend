@@ -18,6 +18,11 @@ const adminSchema = new mongoose.Schema({
 
 adminSchema.statics.signup = async function (email, password) {
   const exist = await this.findOne({ email });
+  const all =await this.find();
+
+  if(all.length!==0){
+    throw Error("Already has an Admin.!.");
+  }
 
   if (exist) {
     throw Error("Email already exists.!.");
