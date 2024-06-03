@@ -34,6 +34,7 @@ export const singupAdmin = async (req, res) => {
 
 export const sendForgetPasswordMail = async (req, res) => {
     const email = req.body.email;
+    console.log("AAAA",req.body)
     if (!email) {
       res.status(400).json({ error: "Email is required." });
       return;

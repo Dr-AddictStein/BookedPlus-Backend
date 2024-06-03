@@ -41,7 +41,7 @@ export const sendWelcomeEmail = async (to, fullName) => {
 };
 
 export const sendForgotPasswordEmail = async (to) => {
-  const subject = "Thank You for Joining the BookedPlus Waitlist!";
+  const subject = "Verification of Your Admin Credintials...";
   const emailContent = `
     <p>Dear Admin,</p>
     <p>Your email has been verified and you are recognized as the Admin.</p>
