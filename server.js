@@ -36,7 +36,7 @@ const upload = multer({ storage });
 
 // use of middlewars
 app.use(
-  cors({ origin: [ "http://localhost:5173", "http://194.238.17.44", "http://bookedplus.com/", "https://bookedplus.com/"] })
+  cors({ origin: [ "http://localhost:5173", "http://194.238.17.44", "http://bookedplus.com", "https://bookedplus.com"] })
 );
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
