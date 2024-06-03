@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose, { connect } from "mongoose";
 import cors from "cors";
 import multer from "multer";
+import request from "request";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -73,6 +74,22 @@ app.post('/uploadImage', upload.single('image'), (req, res) => {
   } else {
     res.status(400).json({ error: 'No file uploaded' });
   }
+});
+
+// Proxy route
+app.use('/proxy/uploadImage', (req, res) => {
+  const url = 'http://http://bookedplus.com/uploadImage';
+  
+  // Set up the request options to include the original request headers and method
+  const options = {
+    url: url,
+    method: req.method,
+    headers: req.headers,
+    body: req.body,
+  };
+
+  // Forward the request to the remote server
+  req.pipe(request(options)).pipe(res);
 });
 
 mongoose
