@@ -21,7 +21,7 @@ adminSchema.statics.signup = async function (email, password) {
   const all =await this.find();
 
   if(all.length!==0){
-    throw Error("Already has an Admin.!.");
+    throw Error("Already has an Admin..!..");
   }
 
   if (exist) {
