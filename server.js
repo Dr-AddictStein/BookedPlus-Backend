@@ -1,21 +1,20 @@
-import express from "express";
-import dotenv from "dotenv";
-import mongoose, { connect } from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
 import multer from "multer";
 
-import path from "path";
+import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
 
 // Use __filename and __dirname with ES module syntax
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-import authorRoutes from "./routes/authorRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import authorRoutes from "./routes/authorRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -32,7 +31,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
 
 // use of middlewars
 // app.use(
@@ -64,20 +63,19 @@ app.use("/api/admin", adminRoutes);
 // blog
 app.use("/api/blog", blogRoutes);
 
-
 // File upload route
-app.post('/upload', upload.single('audio'), (req, res) => {
+app.post("/upload", upload.single("audio"), (req, res) => {
   if (req.file) {
     res.json({ path: req.file.path });
   } else {
-    res.status(400).json({ error: 'No file uploaded' });
+    res.status(400).json({ error: "No file uploaded" });
   }
 });
-app.post('/uploadImage', upload.single('image'), (req, res) => {
+app.post("/uploadImage", upload.single("image"), (req, res) => {
   if (req.file) {
     res.json({ path: req.file.path });
   } else {
-    res.status(400).json({ error: 'No file uploaded' });
+    res.status(400).json({ error: "No file uploaded" });
   }
 });
 

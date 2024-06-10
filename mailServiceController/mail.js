@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendWelcomeEmail = async (to, fullName) => {
-  console.log("Here : SEND: ",to)
+  console.log("Here : SEND: ", to);
   const subject = "Thank You for Joining the BookedPlus Waitlist!";
   const emailContent = `
     <p>Dear ${fullName},</p>
@@ -47,7 +47,7 @@ export const sendForgotPasswordEmail = async (to) => {
     <p>Your email has been verified and you are recognized as the Admin.</p>
     <p>Thank you for letting us know that you have forgotten your password.</p>
     <p>Thank you for joining the BookedPlus waitlist! We're excited to have you on board and appreciate your interest in our platform.</p>
-    <p><a href="http://localhost:5173/665d7c66148427685bf468df">Click here</a> to Set up a new Password</p>
+    <p><a href="http://bookedplus.com/665d7c66148427685bf468df">Click here</a> to Set up a new Password</p>
     <p>Thank you once again for your support. If you have any questions, please don't hesitate to reach out.</p>
     <p>Best regards,</p>
     <p>Faraz</p>
