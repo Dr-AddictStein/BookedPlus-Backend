@@ -68,7 +68,14 @@ app.post("/upload", upload.single("audio"), (req, res) => {
   if (req.file) {
     res.json({ path: req.file.path });
   } else {
-    res.status(400).json({ error: "No file uploaded" });
+    // Handle file upload errors, including exceeding size limit
+    if (req.fileValidationError === "LIMIT_FILE_SIZE") {
+      return res
+        .status(413)
+        .json({ error: "File size exceeds the limit of 10 MB" });
+    } else {
+      res.status(400).json({ error: "No file uploaded" });
+    }
   }
 });
 app.post("/uploadImage", upload.single("image"), (req, res) => {
