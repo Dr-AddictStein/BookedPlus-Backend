@@ -65,6 +65,7 @@ app.use("/api/blog", blogRoutes);
 
 // File upload route
 app.post("/upload", upload.single("audio"), (req, res) => {
+  console.log("hello");
   if (req.file) {
     res.json({ path: req.file.path });
   } else {
