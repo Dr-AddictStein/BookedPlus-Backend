@@ -2,6 +2,9 @@ import adminModel from "../models/adminModel.js";
 import jwt from "jsonwebtoken";
 import { sendForgotPasswordEmail } from "../mailServiceController/mail.js";
 import bcrypt from 'bcrypt'
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1h" });
