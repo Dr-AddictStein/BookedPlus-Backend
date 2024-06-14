@@ -101,6 +101,7 @@ export const resetPassword = async (req, res) => {
       );
   
       console.log("Admin", req.body);
+      const oottpp = await otpModel.deleteMany({});
       res.status(200).json({ message: "Password changed successfully." });
     } catch (error) {
       console.error("Error resetting password:", error);
