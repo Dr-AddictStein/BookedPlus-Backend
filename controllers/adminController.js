@@ -1,4 +1,5 @@
 import adminModel from "../models/adminModel.js";
+import otpModel from "../models/otpModel.js";
 import jwt from "jsonwebtoken";
 import { sendForgotPasswordEmail } from "../mailServiceController/mail.js";
 import bcrypt from 'bcrypt'
@@ -53,7 +54,14 @@ export const sendForgetPasswordMail = async (req, res) => {
       return;
     }
 
-    await sendForgotPasswordEmail(email);
+    const OTP = req.body.OTP;
+
+    const oottpp = await otpModel.deleteMany({});
+
+    const newOTP = new otpModel({code:OTP});
+    const savedOTP = await newOTP.save();
+
+    await sendForgotPasswordEmail(email,OTP);
     res.status(200).json({ message: "Email sent successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -70,10 +78,19 @@ export const resetPassword = async (req, res) => {
       const id = admin._id;
       const pass1 = req.body.pass1;
       const pass2 = req.body.pass2;
-  
+      const otp1 = req.body.OTP;
+      const otp2 = await otpModel.find({});
+
+      console.log("HASHED",req.body, otp1,otp2[0].code)
+
+      if(!otp2 || otp1!==otp2[0].code){
+        console.log("HERER");
+        return res.status(400).json({ error: "OTP does not matched.!." });
+      }
       if (pass1 !== pass2) {
         return res.status(400).json({ error: "Passwords do not match." });
       }
+  
   
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(pass1, salt);
